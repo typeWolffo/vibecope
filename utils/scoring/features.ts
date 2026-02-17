@@ -16,7 +16,7 @@ export interface FeatureResult {
 
 export type FeatureMap = Record<FeatureKey, FeatureResult>;
 
-// ── Helpers ──────────────────────────────────────────────
+// ── Helpers
 
 function clamp01(n: number): number {
   return n < 0 ? 0 : n > 1 ? 1 : n;
@@ -42,7 +42,7 @@ function splitLines(text: string): string[] {
   return text.split(/\n/).filter((l) => l.trim().length > 0);
 }
 
-// ── Structural (language-agnostic) ───────────────────────
+// ── Structural (language-agnostic)
 
 export function extractFormatBro(text: string): FeatureResult {
   const lines = splitLines(text);
@@ -54,7 +54,7 @@ export function extractFormatBro(text: string): FeatureResult {
 
   // Only trigger when most lines are short (bro-post style)
   if (ratio >= 0.7) {
-    const value = clamp01((ratio - 0.7) / 0.3); // 0.7→0, 1.0→1
+    const value = clamp01((ratio - 0.7) / 0.3);
 
     return { value, reason: `Bro-post format (${Math.round(ratio * 100)}% short lines)` };
   }
@@ -76,7 +76,7 @@ export function extractCapsIntensity(text: string): FeatureResult {
   const ratio = capsWords.length / words.length;
 
   if (ratio > 0.02) {
-    const value = clamp01(ratio / 0.15); // 2%→0.13, 15%+→1.0
+    const value = clamp01(ratio / 0.15);
 
     return { value, reason: `ALL CAPS intensity ${Math.round(ratio * 100)}%` };
   }
@@ -93,7 +93,7 @@ export function extractExclamationDensity(text: string): FeatureResult {
   const ratio = exclCount / sentences.length;
 
   if (ratio > 0.2) {
-    const value = clamp01((ratio - 0.2) / 0.5); // 20%→0, 70%+→1.0
+    const value = clamp01((ratio - 0.2) / 0.5);
 
     return { value, reason: `Exclamation density ${Math.round(ratio * 100)}%` };
   }
@@ -117,7 +117,7 @@ export function extractMonetaryClaims(text: string): FeatureResult {
 
   if (contextHits === 0) return { value: 0, reason: null };
 
-  const value = clamp01(contextHits * 0.45); // 1 hit→0.45, 2→0.9, 3+→1.0
+  const value = clamp01(contextHits * 0.45);
 
   return { value, reason: `Monetary claim with hype context (${contextHits}x)` };
 }
@@ -129,10 +129,7 @@ export function extractListicleFormat(text: string): FeatureResult {
   const hasThread =
     /thread\s*🧵|🧵\s*thread/iu.test(text) || /\b(a\s+)?thread\s*[⬇↓👇]/iu.test(text);
 
-  const score =
-    (hasHeader ? 0.4 : 0) +
-    (hasNumbered ? 0.4 : 0) +
-    (hasThread ? 0.3 : 0);
+  const score = (hasHeader ? 0.4 : 0) + (hasNumbered ? 0.4 : 0) + (hasThread ? 0.3 : 0);
 
   if (score === 0) return { value: 0, reason: null };
 
@@ -166,7 +163,7 @@ export function extractRhetoricalHooks(text: string): FeatureResult {
 
   if (hitCount === 0) return { value: 0, reason: null };
 
-  const value = clamp01(hitCount * 0.35); // 1→0.35, 2→0.7, 3+→1.0
+  const value = clamp01(hitCount * 0.35);
 
   return { value, reason: `Rhetorical hooks (${hitCount}x)` };
 }
@@ -180,7 +177,7 @@ export function extractSuperlativeDensity(text: string): FeatureResult {
   const ratio = hits / words.length;
 
   if (ratio > 0.01) {
-    const value = clamp01(ratio / 0.06); // 1%→0.17, 6%+→1.0
+    const value = clamp01(ratio / 0.06);
 
     return { value, reason: `Superlative density ${Math.round(ratio * 100)}% (${hits}x)` };
   }
@@ -188,7 +185,7 @@ export function extractSuperlativeDensity(text: string): FeatureResult {
   return { value: 0, reason: null };
 }
 
-// ── Pattern-based (locale-dependent) ─────────────────────
+// ── Pattern-based (locale-dependent)
 
 export function extractTimeframeClaim(text: string): FeatureResult {
   const patterns = getCompiledPatterns();
@@ -214,7 +211,7 @@ export function extractBuzzwordDensity(text: string, wordCount: number): Feature
   const density = matchCount / wordCount;
 
   if (density > 0.01) {
-    const value = clamp01(density / 0.06); // 1%→0.17, 6%+→1.0
+    const value = clamp01(density / 0.06);
 
     return { value, reason: `Buzzword density ${(density * 100).toFixed(1)}% (${matchCount}x)` };
   }
@@ -246,7 +243,7 @@ export function extractHypeEmoji(text: string, wordCount: number): FeatureResult
   const density = hypeCount / wordCount;
 
   if (density > 0.02) {
-    const value = clamp01(density / 0.08); // 2%→0.25, 8%+→1.0
+    const value = clamp01(density / 0.08);
 
     return { value, reason: `Hype emoji density ${(density * 100).toFixed(1)}% (${hypeCount}x)` };
   }
@@ -274,7 +271,7 @@ export function extractAiReplacement(text: string): FeatureResult {
   return { value: 0, reason: null };
 }
 
-// ── Aggregate ────────────────────────────────────────────
+// ── Aggregate
 
 export function extractAllFeatures(text: string, wordCount: number): FeatureMap {
   return {

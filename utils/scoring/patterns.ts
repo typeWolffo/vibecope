@@ -90,14 +90,12 @@ export function getCompiledPatterns(): CompiledPatterns {
   return cache.patterns;
 }
 
-/** Setup storage watcher — call once per content script */
 export function watchLocaleChanges(): void {
   enabledLocales.watch((newLocales) => {
     cache.patterns = compilePatterns(newLocales);
   });
 }
 
-/** All available locales for UI listing */
 export function getAvailableLocales(): Array<{ locale: string; label: string }> {
   return ALL_LOCALES.map((l) => ({ locale: l.locale, label: l.label }));
 }

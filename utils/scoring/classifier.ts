@@ -39,7 +39,7 @@ export function classifyPost(text: string): number {
     return sum + tfidf * weights.coefficients[idx];
   }, weights.intercept);
 
-  // Sigmoid → 0-100
+  // Sigmoid -> 0-100
   return Math.round((1 / (1 + Math.exp(-dot))) * 100);
 }
 

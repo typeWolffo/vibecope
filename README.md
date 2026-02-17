@@ -1,5 +1,6 @@
 # 🐃
-A fun side project to see how far TF-IDF and some regex can go in detecting hustle-culture hype on social media. It's a browser extension that scores posts on X and LinkedIn and quietly filters the "I replaced my entire engineering team with one prompt" crowd.
+
+A fun side project to see how far TF-IDF and some regex can go in detecting hustle-culture hype on social media. It's a browser extension that scores posts on X and (maybe someday) LinkedIn and quietly filters the "I replaced my entire engineering team with one prompt" crowd.
 
 ### How it works
 

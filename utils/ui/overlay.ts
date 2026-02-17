@@ -106,12 +106,10 @@ export function applyOverlay(
     case 'collapse': {
       const bar = createCollapseOverlay(result);
 
-      // Store original display & height
       postEl.dataset.vibecopeOrigDisplay = postEl.style.display;
       postEl.dataset.vibecopeOrigOverflow = postEl.style.overflow;
       postEl.dataset.vibecopeOrigHeight = postEl.style.height;
 
-      // Hide post content, show bar before it
       postEl.style.overflow = 'hidden';
       postEl.style.height = '0';
       postEl.style.display = 'none';
