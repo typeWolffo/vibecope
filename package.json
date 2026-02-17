@@ -16,7 +16,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,css,html,md,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,css,html,md,json}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,css,html,md,json}\"",
+    "format:py": "tools/.venv/bin/ruff format tools/",
+    "lint:py": "tools/.venv/bin/ruff check tools/"
   },
   "dependencies": {
     "react": "^19.2.4",

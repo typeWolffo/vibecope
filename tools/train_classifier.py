@@ -34,6 +34,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATASET_DIR = ROOT / "tools" / "dataset"
 OUTPUT_DIR = ROOT / "utils" / "scoring" / "ml"
 
+
 def load_jsonl(path: Path) -> list[str]:
     texts = []
     with open(path) as f:
@@ -43,8 +44,10 @@ def load_jsonl(path: Path) -> list[str]:
                 texts.append(json.loads(line)["text"])
     return texts
 
+
 def log(msg: str) -> None:
     print(f"[train] {msg}", flush=True)
+
 
 def main():
     log("VibeCope ML classifier trainer")
@@ -72,7 +75,9 @@ def main():
     texts = hustle + normal
     labels = np.array([1] * len(hustle) + [0] * len(normal))
 
-    log("Building TF-IDF vocabulary (unigrams + bigrams + trigrams, max 5000 features)...")
+    log(
+        "Building TF-IDF vocabulary (unigrams + bigrams + trigrams, max 5000 features)..."
+    )
     vectorizer = TfidfVectorizer(
         ngram_range=(1, 3),
         max_features=5000,
@@ -143,6 +148,7 @@ def main():
 
     print()
     log("Done. Run 'bun run build' to bundle the model into the extension.")
+
 
 if __name__ == "__main__":
     main()
