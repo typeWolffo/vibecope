@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Sora:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Surfaces */
+  --bg-primary: #0a0a0a;
+  --bg-elevated: #111111;
+  --bg-inset: #080808;
+  --bg-control: #1a1a1a;
+
+  /* Borders */
+  --border-default: #222222;
+  --border-strong: #333333;
+
+  /* Accent */
+  --accent-primary: #ff3e55;
+  --accent-primary-dim: rgba(255, 62, 85, 0.15);
+  --accent-primary-glow: rgba(255, 62, 85, 0.3);
+  --accent-amber: #ffb636;
+  --accent-amber-dim: rgba(255, 182, 54, 0.15);
+
+  /* Text */
+  --text-primary: #e8e8e8;
+  --text-secondary: #aaaaaa;
+  --text-tertiary: #777777;
+  --text-inverse: #0a0a0a;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --font-body: 'Sora', system-ui, sans-serif;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+}
+
+#root {
+  width: 300px;
+}
